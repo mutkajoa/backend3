@@ -125,14 +125,15 @@ if (isset($_SESSION['username'])) {
                  while ($row = $result->fetch_assoc()) {
                     $sql1 = "SELECT * FROM loppis WHERE saljare='".$row['namn']."';";
                     $rows = $conn->query($sql1);
+                    $abuser = $row['namn'];
                     print("<p><b>Användarnamn:</b> ".$row['namn']."<br>
                     <b>Email:</b> ".$row['epost']."<br>
-                    <b>Din roll är:</b> ".$row['roll']."<br>
+                    <b>Användarens roll är:</b> ".$row['roll']."<br>
                     <b>Registrerad sedan:</b> ".date("d.m.Y H:i:s", strtotime($row['datum']))."<br>
                     <b>Antal annonser: </b><a href='annonser.php?user=".$row['namn']."'>".$rows->num_rows."</a>
                     </p>");
                     print("<p>Är ".$row['namn']." en skummis?<br>
-                    <form action='action_page.php'>
+                    <form action='profil.php' method='POST'>
                     <select name='abuse'>
                     <option value='scammer'>Scammer</option>
                     <option value='troll'>Troll</option>
@@ -143,7 +144,18 @@ if (isset($_SESSION['username'])) {
                     <input type='submit' name='report' value='Rapportera'>
                     </form></p>"
                 );
-                    //TODO skicka abuse report till DB
+                  if(isset($_POST['report'])){
+                      $rep = $_SESSION['username'];
+                      $typ = $_POST['abuse'];
+                    $repSql = "INSERT INTO abuse (namn,reporter,typ)
+                      VALUES('$abuser','$rep','$typ');";
+                       $result = $conn->query($repSql);
+                       if ($conn->affected_rows > 0) {
+                        print("<p>Inmatning lyckades!</p>");
+                    } else {
+                        print("<p>Inmatning lyckades inte!</p>");
+                    }
+                  }
             };
         } else {
             print("<p>Ingen profil hittades</p>");
