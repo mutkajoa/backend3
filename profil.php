@@ -116,7 +116,8 @@ if (isset($_SESSION['username'])) {
                 }
                 //Ladda upp profilbild
                         $katalog = "files/";
-                        $target_file = $katalog . basename($_FILES["fileToUpload"]["name"]);
+                        $filename = basename($_FILES["fileToUpload"]["name"]);
+                        $target_file = $katalog;
                         $uploadOk = 1;
                         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                         // Check if image file is a actual image or fake image
