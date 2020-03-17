@@ -116,7 +116,8 @@ if (isset($_SESSION['username'])) {
                 }
                 //Ladda upp profilbild
                         $katalog = "files/";
-                        $filename = basename($_FILES["fileToUpload"]["name"]);
+                        $tempname = explode(".",basename($_FILES["fileToUpload"]["name"]));
+                        $newname = 
                         $target_file = $katalog;
                         $uploadOk = 1;
                         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
