@@ -65,7 +65,7 @@ if (isset($_SESSION['username'])) {
                     <input type='password' name='losen1'><br><br>
                     <input type='submit' name='updatePsw' value='Updatera Lösenord'>
                     </form>
-                    <form action='' method='POST' enctype='multipart/form-data'>
+                    <form action='profil.php' method='POST' enctype='multipart/form-data'>
                     <p>Välj en profilbild till ditt konto</p>
                     <input type='file' name='fileToUpload' id='fileToUpload'>
                     <input type='submit' value='Ladda upp bild' name='uploadpic'>
@@ -115,14 +115,15 @@ if (isset($_SESSION['username'])) {
                     }
                 }
                 //Ladda upp profilbild
-                        $katalog = "files/";
-                        $tempname = explode(".",basename($_FILES["fileToUpload"]["name"]));
-                        $newname = 
-                        $target_file = $katalog;
-                        $uploadOk = 1;
-                        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                        
                         // Check if image file is a actual image or fake image
                         if(isset($_POST["submit"])) {
+                            $katalog = "files/";
+                            $tempname = explode(".",basename($_FILES["fileToUpload"]["name"]));
+                            $newname = $_SESSION['username']."profilepic".end($tempname);
+                            $target_file = $katalog.$newname;
+                            $uploadOk = 1;
+                            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                             if($check !== false) {
                                 echo ("<p>Filen är en bild - " . $check["mime"] . ".</p>");
