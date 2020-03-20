@@ -14,7 +14,7 @@ include("smallnavbar.php");
     <script src="main.js"></script>
 </head>
 <body>
-    <h1>Projekt 2</h1>
+    <h1>Projekt 3</h1>
     <?php include 'navbar.php'?>
 <?php
 if (isset($_SESSION['username'])) {
@@ -30,9 +30,9 @@ if (isset($_SESSION['username'])) {
 ?>
 <br>
 <div>
-<h3>Rapport för Projekt2</h3>
+<h3>Rapport för Projekt3</h3>
 
-<h4>Specifikation för Projekt2</h4>
+<h4>Specifikation för Projekt3</h4>
 <p>För projekt två valde vi att inte vara så kreativa och fortsatte på loppis idén från kursen 2019<br>
 dels för att det var samma som i fjol och dels för att Jocke hade en grund för projektet kvar från året innan.<br></p>
 
